@@ -1,4 +1,5 @@
-// MO algorithm to to process q queries and for each query, displays the number of distinct elements in that range
+// MO algorithm to process q queries and for each query, displays the number of distinct elements in that range. This application doesn't support updates.
+// If this doesn't work try declaring the blockSize as a constant globally according to the largest array size in the constraints
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -8,18 +9,25 @@ struct query
     int index,left,right,block;
 };
 
-bool cmp(query a,query b)
+bool cmp(query q1,query q2)
 {
-    if(a.block==b.block)
+    if(q1.block==q2.block)
     {
-        return a.right<b.right;
+        if(q1.block&1)
+        {
+            return q1.right<q2.right;
+        }
+        else
+        {
+            return q1.right>q2.right;
+        }
     }
-    return a.block<b.block;
+    return q1.block<q2.block;
 }
 
 // To add an element in this case, increase its freq. If the freq becomes 1, we found a new element and so increment the number of distinct elements by one
 
-void addElement(int pos,vector<int> &a,vector<int> &freq,int &cnt)
+inline void addElement(int pos,vector<int> &a,vector<int> &freq,int &cnt)
 {
     freq[a[pos]]++;
     if(freq[a[pos]]==1)
@@ -30,7 +38,7 @@ void addElement(int pos,vector<int> &a,vector<int> &freq,int &cnt)
 
 // To remove an element, decrease its freq. If the freq becomes 0, we deleted the element completely and so decrement the number of distinct elements by one
 
-void removeElement(int pos,vector<int> &a,vector<int> &freq,int &cnt)
+inline void removeElement(int pos,vector<int> &a,vector<int> &freq,int &cnt)
 {
     freq[a[pos]]--;
     if(freq[a[pos]]==0)
