@@ -11,7 +11,7 @@ struct query
 
 bool cmp(query q1,query q2)
 {
-    if(q1.block==q2.block)
+    if(q1.block==q2.block)    // Try reversing the inequalities inside this in case of TLE
     {
         if(q1.block&1)
         {
