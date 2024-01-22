@@ -1,5 +1,6 @@
 /*
  * This code implements hld and ett in the same Segment Tree
+ * https://www.hackerrank.com/challenges/subtrees-and-paths/problem
  */
 
 #include <bits/stdc++.h>
